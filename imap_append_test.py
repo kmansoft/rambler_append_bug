@@ -7,6 +7,7 @@ import imaplib
 import smtplib
 import mimetypes
 import time
+import base64
 
 from email import encoders
 from email.message import Message
@@ -45,8 +46,7 @@ if __name__ == "__main__":
 		print x
 		exit(1)
 	with srcfile:
-		msg = MIMEBase("image", "jpg")
-		msg.set_payload(srcfile.read())
+		msg = MIMEImage(srcfile.read(), _subtype='jpg')
 
 	msg.add_header('Content-Disposition', 'attachment', filename='image1.jpg')
 	outer.attach(msg)
@@ -62,6 +62,8 @@ if __name__ == "__main__":
 	print M
 
 	msg = str(outer)
+
+	print msg[:2048]
 
 	print "Uploading {0} bytes, started at {1}...".format(len(msg), timestr)
 	M.append(args.FOLDER, "\Seen", timestr, msg)
