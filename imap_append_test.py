@@ -66,7 +66,7 @@ if __name__ == "__main__":
 	print msg[:2048]
 
 	print "Uploading {0} bytes, started at {1}...".format(len(msg), timestr)
-	M.append(args.FOLDER, "\Seen", timestr, msg)
+	print M.append(args.FOLDER, "\Seen", timestr, msg)
 
 	timeend = imaplib.Time2Internaldate(time.time())
 	print "Upload done {0}".format(timeend)
